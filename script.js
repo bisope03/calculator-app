@@ -90,13 +90,53 @@ class Calculator{
     }
 }
 
+const themeBtns = document.querySelectorAll('.button');
 const numberBtns = document.querySelectorAll('[data-number]');
 const operationBtns = document.querySelectorAll('[data-operation]');
 const previousOperandText = document.querySelector('[data-previous]');
 const currentOperandText = document.querySelector('[data-current]');
 const resetBtn = document.querySelector('[data-reset]');
 const equalsBtn = document.querySelector('[data-equals]');
-const deleteBtn = document.querySelector('[data-delete]')
+const deleteBtn = document.querySelector('[data-delete]');
+
+var arr = [...themeBtns];
+
+arr.forEach((element, index) => {
+    element.addEventListener("click", () => {
+        element.style.opacity = "1";
+
+        if(index == 0){
+            document.body.classList.add('darkMode');
+            document.body.classList.remove('lightMode');
+            document.body.classList.remove('purpleMode');
+            localStorage.setItem('darkMode', 'enabled');
+            localStorage.setItem('purpleMode', null);
+            localStorage.setItem('lightMode', null);
+        }else if(index == 1){
+            document.body.classList.add('lightMode');
+            document.body.classList.remove('darkMode');
+            document.body.classList.remove('purpleMode');
+            localStorage.setItem('darkMode', null);
+            localStorage.setItem('purpleMode', null);
+            localStorage.setItem('lightMode', 'enabled');
+        }else{
+            document.body.classList.add('purpleMode');
+            document.body.classList.remove('darkMode');
+            document.body.classList.remove('lightMode');
+            localStorage.setItem('darkMode', null);
+            localStorage.setItem('purpleMode', 'enabled');
+            localStorage.setItem('lightMode', null);
+        }
+
+        arr
+        .filter(function (item){
+           return item != element;
+        })
+        .forEach((item) => {
+            item.style.opacity = "0";
+        });
+    })
+})
 
 const calculator = new Calculator(previousOperandText, currentOperandText);
 

@@ -1,4 +1,3 @@
-
 :root{
     /* backgrounds */
     --clr-main-backgroud: hsl(222, 26%, 31%);
@@ -17,12 +16,52 @@
 
     /* text */
     --clr-key-numbers: hsl(221, 14%, 31%);
+    --clr-display-numbers: hsl(0, 0%, 100%);
     --clr-white: hsl(0, 0%, 100%);
     --clr-previous: hsl(220, 25%, 66%);
 
     --clr-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.lightMode{
+    --clr-main-backgroud: hsl(0, 0%, 90%);
+    --clr-toggle-background: hsl(0, 5%, 81%);
+    --clr-screen-background: hsl(0, 0%, 93%);
+
+    --clr-key-background: hsl(185, 42%, 37%);
+    --clr-key-hover: hsl(185, 47%, 45%);
+    --clr-key-shadow: hsl(185, 58%, 25%);
+    --clr-red-background: hsl(25, 98%, 40%);
+    --clr-red-hover: hsl(25, 79%, 48%);
+    --clr-red-shadow: hsl(25, 99%, 27%);
+    --clr-gray-background: hsl(45, 7%, 89%);
+    --clr-gray-shadow: hsl(35, 11%, 61%);
+
+    --clr-key-numbers: hsl(60, 10%, 19%);
+    --clr-display-numbers: hsl(60, 10%, 19%);
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-previous: hsl(60, 28%, 23%);
+}
+
+.purpleMode{
+    --clr-main-backgroud: hsl(268, 75%, 9%);
+    --clr-toggle-background: hsl(268, 71%, 12%);
+    --clr-screen-background: hsl(268, 71%, 12%);
+     
+    --clr-key-background:  hsl(281, 89%, 26%);
+    --clr-key-hover: hsl(281, 73%, 40%);
+    --clr-key-shadow: hsl(285, 91%, 52%);
+    --clr-red-background: hsl(176, 100%, 44%);
+    --clr-red-hover: hsl(176, 90%, 58%);
+    --clr-red-shadow: hsl(177, 92%, 70%);
+    --clr-gray-background:  hsl(268, 47%, 21%);
+    --clr-gray-shadow: hsl(290, 70%, 36%);
+
+    --clr-key-numbers: hsl(52, 100%, 62%);
+    --clr-display-numbers: hsl(52, 100%, 62%);
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-previous: hsl(52, 55%, 50%);
+}
 
 *, *::before, *::after{
     box-sizing: border-box;
@@ -30,24 +69,111 @@
     font-weight: 700;
 }
 
-body{
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+p,
+figure,
+picture {
+    margin: 0; 
     padding: 0;
-    margin: 0;
-    background: var(--clr-main-backgroud);  
+    border: 0;
+    vertical-align: baseline;
+}
+
+h1,
+h2,
+h3,
+p {
+    font-weight: 300;
+}
+
+
+/* make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+body{
+    line-height: 1;
+}
+
+a, a:hover, a:focus, a:active{
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+body{
+    width: 100%;
+    overflow: hidden;
+    background: var(--clr-main-backgroud); 
 }
 
 .calculator-app{
     display: flex;
-    align-items: center;
+    justify-items: center;
     flex-direction: column;
+    min-height: 100vh;
     padding: 4rem 2.2rem;
     gap: 1rem;
-    min-height: 100vh;
+    place-items: center; 
 }
 
 .calculator-header{
+    width: 100%;
+    max-width: 25rem;
     font-size: 2rem;
-    color: var(--clr-white);
+    color: var(--clr-display-numbers);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.theme-switch{
+    display: flex;
+    justify-content: space-around;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.theme-switch > h5{
+    font-size: 1rem;
+}
+
+input {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: 0.3rem 0.2rem;
+    place-items: center;
+    appearance: none;
+    background-color: var(--clr-red-background);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.switch{
+    display: flex;
+    justify-content: center;
+    background-color: var(--clr-toggle-background);
+    border-radius: 50px;
+}
+
+#one {
+    opacity: 1;
 }
 
 .calculator-display{
@@ -73,7 +199,7 @@ body{
 }
 
 .calculator-display .current-operand{
-    color: var(--clr-white);
+    color: var(--clr-display-numbers);
     font-size: 2rem;
 }
 
@@ -82,7 +208,6 @@ body{
     max-width: 25rem;
     display: grid;
     justify-content: center;
-    align-items: center;
     gap: 1rem;
     grid-template-columns: repeat(4, 4.7rem);
     grid-template-rows: repeat (5, 5rem);
